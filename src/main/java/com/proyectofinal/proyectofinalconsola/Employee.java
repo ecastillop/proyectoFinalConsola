@@ -120,7 +120,7 @@ public class Employee {
         System.out.print("Apellido: ");
         String apellido = scan.nextLine();
         System.out.print("Numero de Documento: ");
-        String documenNumber = scan.nextLine();
+        String documentNumber = scan.nextLine();
         System.out.print("Tipo de Documento (1=DNI, 2=RUC, 3=Carnet Ext.): ");
         int documentType = scan.nextInt();
         scan.nextLine();
@@ -137,11 +137,62 @@ public class Employee {
             System.out.println("Formato de fecha invalido usa (yyyy-MM-dd)");
             return;
         }
+        System.out.println("Genero..Masculino 'M' o Femenino 'F'");
+        char genero=scan.next().charAt(0);
+        System.out.println("Estado civil");
+        String estadoCivil = scan.nextLine();
+        System.out.println("Distrito");
+        String distrito=scan.nextLine();
+        System.out.println("Nacionalidad");
+        String nacionalidad=scan.nextLine();
+        System.out.println("Salario");
+        double salario=scan.nextDouble();
+        System.out.println("Puesto.");
+        String puesto=scan.nextLine();
+        System.out.println("Correo");
+        String correo=scan.nextLine();
+        System.out.println("Sala");
+        String sala=scan.nextLine();
+        System.out.println("Capacidad");
+        int capacidad=scan.nextInt();
+        System.out.println("Ubicacion");
+        String ubicacion=scan.nextLine();
+        System.out.println("Reunion");
+        String reunion=scan.nextLine();
+        System.out.println("Hora de Inicio");
+        int horaDeInicio=scan.nextInt();
+        System.out.println("Hora de Finalizacion");
+        int horaDeFinalizacion=scan.nextInt();
+        
+        
+        
+        
+        
+        
+        
+        
         // instancia de clase
         Employee employee = new Employee();
         // mediante los SETTERS asigna valores a cada atributo
         employee.setFirstName(nombre);
         employee.setLastName(apellido);
+        employee.setDocumentNumber(documentNumber);
+        employee.setDocumentType(documentType);
+        employee.setAge(age);
+        employee.setBirthday(strBirthday);
+        employee.setGender(genero);
+        employee.setMaritalStatus(estadoCivil);
+        employee.setDistrict(distrito);
+        employee.setNationality(nacionalidad);
+        employee.setSalary(salario);
+        employee.setPosition(puesto);
+        employee.setEmail(correo);
+        employee.setRoom(sala);
+        employee.setCapacity(capacidad);
+        employee.setLocation(ubicacion);
+        employee.setMeetingSubject(reunion);
+        employee.setStartTime(horaDeInicio);
+        employee.setEndTime(horaDeFinalizacion);
         // agrega registro a la LISTA
         listEmployee.add(employee);
         System.out.println("Empleado registrado");
@@ -170,6 +221,24 @@ public class Employee {
                           || this.endTime.isBefore(emp.getStartTime()))); // mi fin antes de su inicio
     }
     
+    public boolean geyEmployeeBySalary(List<Employee> listEmployee, double salary) {
+        for(int x = 0; x < listEmployee.size(); x++){
+            //listEmployee.get(x).getDistrict().equalsIgnoreCase(district);
+            if (listEmployee.get(x).getSalary() >= salary) {
+                System.out.print(listEmployee.get(x).toString());
+            }
+        }
+        return false;
+    }
+    public boolean geyEmployeeByDistrict(List<Employee> listEmployee, String district){
+    for(int x=0; x>listEmployee.size();x++){
+        if (listEmployee.get(x).getDistrict().equalsIgnoreCase(district)){
+            System.out.print(listEmployee.get(x).toString());
+        }
+    }
+        return false;
+    }
+    
     @Override
     public String toString() {
         return String.format("employeID: %d, firstName: %s, lastName: %s, documentNumber: %s, documentType: %d, "
@@ -180,5 +249,17 @@ public class Employee {
                 this.age, this.birthday, this.gender, this.maritalStatus, this.district, this.address, this.nationality,
                 this.salary, this.position, this.email, this.room, this.capacity, this.location, this.meetingSubject,
                 this.startTime, this.endTime);
+    }
+
+    private void setBirthday(String strBirthday) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void setEndTime(int horaDeFinalizacion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void setStartTime(int horaDeInicio) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
