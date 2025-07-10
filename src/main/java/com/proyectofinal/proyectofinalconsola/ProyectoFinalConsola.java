@@ -60,7 +60,7 @@ public class ProyectoFinalConsola {
         listEmployee.add(new Employee(19,"Rosa","Santillan","76453222",2,27,Date.valueOf("1998-03-05"),'F',"Soltera","Collique","Jr.huascaran 234","Peruana",5432.00,"eiiiiio","rosaSantillan@example.com","sala 02",26,"Piso 01-centro","Manejo de la IA",LocalDateTime.of(2025,9,7,3,6),LocalDateTime.of(2025,7,3,5,6)));
         listEmployee.add(new Employee(20,"Sandre","Laverianao","76339903",1,30,Date.valueOf("1995-11-30"),'F',"Casada","Puente Piedra","jr. Moscu 244","Mexicana",6543.00,"errooo","sandraLaveriano@example.com","sala 03",25,"piso 03-sur","Competencias Lavorales",LocalDateTime.of(2025,4,5,3,7),LocalDateTime.of(2025,6,6,7,8))); 
         boolean salir = false;
-        while (!salir) { // al agregar signo ! se niega, entonces evalua false
+        while (!salir) { // al agregar signo ! se niega, entonces evalua false.
             System.out.print("Lista Opciones\n"
                     + "1. Mantenimiento empleado\n"
                     + "2. Seleccionar Sala\n"
