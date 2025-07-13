@@ -7,6 +7,8 @@ package com.proyectofinal.proyectofinalconsola;
 import static com.proyectofinal.proyectofinalconsola.ProyectoFinalConsola.scan;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -130,9 +132,11 @@ public class Employee {
         System.out.print("Nacimiento (yyyy-MM-dd): ");
         String strBirthday = scan.nextLine();
         DateTimeFormatter dtfB = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate nacimiento;
+        LocalDate nacimientoLD;
+        Date nacimiento;
         try {
-            nacimiento = LocalDate.parse(strBirthday, dtfB);
+            nacimientoLD = LocalDate.parse(strBirthday, dtfB);
+            nacimiento = Date.from(nacimientoLD.atStartOfDay(ZoneId.systemDefault()).toInstant());
         } catch (Exception ex) {
             System.out.println("Formato de fecha invalido usa (yyyy-MM-dd)");
             return;
@@ -161,12 +165,27 @@ public class Employee {
         String ubicacion=scan.nextLine();
         System.out.println("Reunion");
         String reunion=scan.nextLine();
-        System.out.println("Hora de Inicio");
-        int horaDeInicio=scan.nextInt();
-        scan.nextLine();
-        System.out.println("Hora de Finalizacion");
-        int horaDeFinalizacion=scan.nextInt();
-        scan.nextLine();
+        System.out.println("Hora de Inicio (HH:mm)");
+        String horaDeInicio=scan.nextLine();
+        System.out.println("Hora de Finalizacion (HH:mm)");
+        String horaDeFinalizacion=scan.nextLine();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime inicio = null;
+        LocalDateTime fin = null;
+        try {
+            LocalTime inicioTime = LocalTime.parse(horaDeInicio, timeFormatter);
+            LocalTime finTime = LocalTime.parse(horaDeFinalizacion, timeFormatter);
+            LocalDate hoy = LocalDate.now();
+            inicio = LocalDateTime.of(hoy, inicioTime);
+            fin = LocalDateTime.of(hoy, finTime);
+            if (fin.isAfter(inicio)) {
+                System.out.println("Error: la hora fin debe ser mayor que hora inicio");
+                return;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+            return;
+        }
         
         // instancia de clase
         Employee employee = new Employee();
@@ -188,8 +207,8 @@ public class Employee {
         employee.setCapacity(capacidad);
         employee.setLocation(ubicacion);
         employee.setMeetingSubject(reunion);
-        employee.setStartTime(horaDeInicio);
-        employee.setEndTime(horaDeFinalizacion);
+        employee.setStartTime(inicio);
+        employee.setEndTime(fin);
         // agrega registro a la LISTA
         listEmployee.add(employee);
         System.out.println("Empleado registrado");
