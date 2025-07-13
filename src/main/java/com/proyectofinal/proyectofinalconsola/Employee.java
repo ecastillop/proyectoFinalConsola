@@ -120,24 +120,24 @@ public class Employee {
         System.out.print("Apellido: ");
         String apellido = scan.nextLine();
         System.out.print("Numero de Documento: ");
-        String documentNumber = scan.nextLine();
+        String numeroDocumento = scan.nextLine();
         System.out.print("Tipo de Documento (1=DNI, 2=RUC, 3=Carnet Ext.): ");
-        int documentType = scan.nextInt();
+        int tipoDocumento = scan.nextInt();
         scan.nextLine();
         System.out.print("Edad: ");
-        int age = scan.nextInt();
+        int edad = scan.nextInt();
         scan.nextLine();
         System.out.print("Nacimiento (yyyy-MM-dd): ");
         String strBirthday = scan.nextLine();
         DateTimeFormatter dtfB = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate birthday;
+        LocalDate nacimiento;
         try {
-            birthday = LocalDate.parse(strBirthday, dtfB);
+            nacimiento = LocalDate.parse(strBirthday, dtfB);
         } catch (Exception ex) {
             System.out.println("Formato de fecha invalido usa (yyyy-MM-dd)");
             return;
         }
-        System.out.println("Genero..Masculino 'M' o Femenino 'F'");
+        System.out.println("Genero (Masculino=M, Femenino=F)");
         char genero=scan.next().charAt(0);
         System.out.println("Estado civil");
         String estadoCivil = scan.nextLine();
@@ -147,6 +147,7 @@ public class Employee {
         String nacionalidad=scan.nextLine();
         System.out.println("Salario");
         double salario=scan.nextDouble();
+        scan.nextLine();
         System.out.println("Puesto.");
         String puesto=scan.nextLine();
         System.out.println("Correo");
@@ -155,31 +156,27 @@ public class Employee {
         String sala=scan.nextLine();
         System.out.println("Capacidad");
         int capacidad=scan.nextInt();
+        scan.nextLine();
         System.out.println("Ubicacion");
         String ubicacion=scan.nextLine();
         System.out.println("Reunion");
         String reunion=scan.nextLine();
         System.out.println("Hora de Inicio");
         int horaDeInicio=scan.nextInt();
+        scan.nextLine();
         System.out.println("Hora de Finalizacion");
         int horaDeFinalizacion=scan.nextInt();
-        
-        
-        
-        
-        
-        
-        
+        scan.nextLine();
         
         // instancia de clase
         Employee employee = new Employee();
         // mediante los SETTERS asigna valores a cada atributo
         employee.setFirstName(nombre);
         employee.setLastName(apellido);
-        employee.setDocumentNumber(documentNumber);
-        employee.setDocumentType(documentType);
-        employee.setAge(age);
-        employee.setBirthday(strBirthday);
+        employee.setDocumentNumber(numeroDocumento);
+        employee.setDocumentType(tipoDocumento);
+        employee.setAge(edad);
+        employee.setBirthday(nacimiento);
         employee.setGender(genero);
         employee.setMaritalStatus(estadoCivil);
         employee.setDistrict(distrito);
@@ -197,48 +194,66 @@ public class Employee {
         listEmployee.add(employee);
         System.out.println("Empleado registrado");
     }
+    // permite actualizar empleado en la lista
     public void actualizaEmpleado(int id, Employee employee, List<Employee> listEmployee) {
+        // segun el indice (id) se actualiza el empleado
         listEmployee.set(id, employee);
     }
     // busca sala en la lista, si existe retorna true, sino false
     public boolean selectRoom(List<Employee> listEmployee) {
+        // se consume metodo checkAvailability enviando dos parametros, la lista de empleado y la sala
+        // retorna true si sala esta disponible, sino false
         boolean bool = this.checkAvailability(listEmployee, this.room);
+        // establece valor por defecto para variable msg
         String msg = String.format("La sala %s si se encuentra disponible", this.room);
         // si es falso muestra mensaje y limpia atributo sala
         if (!bool) {
+            // sobre escribe valor de variable
             msg = String.format("La sala %s no se encuentra disponible", this.room);
+            // se limpia el valor del atributo sala
             this.room = "";
         }
+        // muestra en pantalla el mensaje
         System.out.println(msg);
         return bool;
     }
     // busca sala en la lista, verificando su disponibilidad usando startTime, endTime
     public boolean checkAvailability(List<Employee> listEmployee, String room) {
+        // se itera cada elementos de la lista de empleados haciendo uso de stream()
+        // stream() es similar a for, pero mucho mas robusto y mas rapido
+        // filter() permite filtrar los elementos segun las condiciones dadas
+        // noneMatch() retorna true/false, verifica que ningun elemento de lista cumpla con la condicion
         return listEmployee.stream()
                 .filter(emp -> emp.getEmployeeID() != this.getEmployeeID() && room.equalsIgnoreCase(emp.getRoom()))
                 .noneMatch(emp -> 
                         !(emp.endTime.isBefore(this.startTime) // fin de otro antes de mi inicio
                           || this.endTime.isBefore(emp.getStartTime()))); // mi fin antes de su inicio
     }
-    
-    public boolean geyEmployeeBySalary(List<Employee> listEmployee, double salary) {
+    // busca empleados en la lista que tengan mayor o igual salario buscado mediante parametro salary
+    public void geyEmployeeBySalary(List<Employee> listEmployee, double salary) {
+        // recorre toda la lista de empleados
         for(int x = 0; x < listEmployee.size(); x++){
-            //listEmployee.get(x).getDistrict().equalsIgnoreCase(district);
+            // valida que el empleado de la iteracion actual tenga igual o mayor salario
             if (listEmployee.get(x).getSalary() >= salary) {
+                // muestra en pantalla toda la informacion del empleado
                 System.out.print(listEmployee.get(x).toString());
             }
         }
-        return false;
     }
-    public boolean geyEmployeeByDistrict(List<Employee> listEmployee, String district){
-    for(int x=0; x>listEmployee.size();x++){
-        if (listEmployee.get(x).getDistrict().equalsIgnoreCase(district)){
-            System.out.print(listEmployee.get(x).toString());
+    // busca empleados en la lista que pertenezcan al distrito buscado mediante parametro district
+    public void geyEmployeeByDistrict(List<Employee> listEmployee, String district){
+        // recorre toda la lista de empleados
+        for(int x=0; x < listEmployee.size(); x++){
+            // valida que el empleado de la iteracion actual pertenezca al distrito buscado
+            // .equalsIgnoreCase hace una busqueda de cadena ignorando si es mayuscula o minuscula
+            if (listEmployee.get(x).getDistrict().equalsIgnoreCase(district)){
+                // muestra en pantalla toda la informacion del empleado
+                System.out.print(listEmployee.get(x).toString());
+            }
         }
     }
-        return false;
-    }
-    
+    // @Override permite sobre escribir metodos
+    // metodo toString retorna toda la informacion del empleado en formato String
     @Override
     public String toString() {
         return String.format("employeID: %d, firstName: %s, lastName: %s, documentNumber: %s, documentType: %d, "
@@ -249,17 +264,5 @@ public class Employee {
                 this.age, this.birthday, this.gender, this.maritalStatus, this.district, this.address, this.nationality,
                 this.salary, this.position, this.email, this.room, this.capacity, this.location, this.meetingSubject,
                 this.startTime, this.endTime);
-    }
-
-    private void setBirthday(String strBirthday) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setEndTime(int horaDeFinalizacion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setStartTime(int horaDeInicio) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

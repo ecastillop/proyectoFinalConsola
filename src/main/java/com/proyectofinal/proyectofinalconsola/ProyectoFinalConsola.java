@@ -4,10 +4,8 @@
 
 package com.proyectofinal.proyectofinalconsola;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
