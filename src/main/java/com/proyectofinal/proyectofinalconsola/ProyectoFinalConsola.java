@@ -18,6 +18,7 @@ public class ProyectoFinalConsola {
     
     public static Employee instanciaEmployee = new Employee(); // DECLARACIÓN DE INSTANCIA GENERAL DE ENTIDAD
     public static List<Employee> listEmployee = new ArrayList<>(); // DECLARACIÓN DE LISTA, SIEMPRE EN MEMORIA    
+    public static int employeeID = 0;
     
     public static final int[] idSalas = { 1,2,3,4,5,6,7,8,9,10 };
     public static final String[] salas = { "sala 01", "sala 02", "sala 03", "sala 04", "sala 05", 
@@ -62,6 +63,11 @@ public class ProyectoFinalConsola {
             System.out.print("Lista Opciones\n"
                     + "1. Mantenimiento empleado\n"
                     + "2. Seleccionar Sala\n"
+                    + "3. Programar reunion\n"
+                    + "4. Re-programar reunion\n"
+                    + "5. Cancelar reunion\n"
+                    + "6. Obtener Empleados por salario\n"
+                    + "7. Obtener Empleados por distrito\n"
                     + "0. Salir\n"
                     + "Escoge la opcion: ");
             int option = scan.nextInt();
@@ -75,6 +81,21 @@ public class ProyectoFinalConsola {
                     break;
                 case 2:
                     instanciaClasePrincipal.selecionarSala();
+                    break;
+                case 3:
+                    instanciaClasePrincipal.programarReunion();
+                    break;
+                case 4:
+                    instanciaClasePrincipal.reprogramarReunion();
+                    break;
+                case 5:
+                    instanciaClasePrincipal.cancelarReunion();
+                    break;
+                case 6:
+                    instanciaClasePrincipal.obtenerEmpleadoPorSalario();
+                    break;
+                case 7:
+                    instanciaClasePrincipal.obtenerEmpleadoPorDistrito();
                     break;
                 default:
                     System.out.println("Opcion invalida.");
@@ -137,11 +158,15 @@ public class ProyectoFinalConsola {
         System.out.println("***");
     }
     public void selecionarSala(){
+        employeeID = 0;
         System.out.print("Ingrese ID empleado:");
         int id = scan.nextInt();
         scan.nextLine();
-        // stream es similar a for pero mucho mejor y mas rapido
-        Employee emp = listEmployee.stream().filter(e -> id == e.getEmployeeID()).findFirst().orElse(null);
+        if (id > 0) {
+            employeeID = id;
+        }
+        // stream es similar a for pero mucho más conciso, con mejoras notables
+        Employee emp = listEmployee.stream().filter(e -> employeeID == e.getEmployeeID()).findFirst().orElse(null);
         if (emp != null){
             System.out.print("Ingrese ID sala: ");
             int idSala = scan.nextInt();
@@ -161,7 +186,62 @@ public class ProyectoFinalConsola {
                 System.out.println("No existe sala con ID: " + idSala);                
             }
         } else {
-            System.out.println("No existe empleado con ID: " + id);
+            System.out.println("No existe empleado con ID: " + employeeID);
         }
+    }
+    public void programarReunion() {
+        if (employeeID != 0) {
+            Employee emp = listEmployee.stream().filter(e -> employeeID == e.getEmployeeID()).findFirst().orElse(null);
+            if (emp != null){
+                boolean bool = emp.create(listEmployee);
+            } else {
+                System.out.println("No existe empleado con ID: " + employeeID);
+            }
+        } else {
+            System.out.println("Primero debe seleccionar sala y empleado");
+        }
+    }    
+    public void reprogramarReunion() {        
+        employeeID = 0;
+        System.out.print("Ingrese ID empleado:");
+        int id = scan.nextInt();
+        scan.nextLine();
+        if (id != 0) {
+            Employee emp = listEmployee.stream().filter(e -> id == e.getEmployeeID()).findFirst().orElse(null);
+            if (emp != null){
+                emp.rescheduleMeeting(listEmployee);
+            } else {
+                System.out.println("No existe empleado con ID: " + id);
+            }
+        } else {
+            System.out.println("Debe ingresa ID valido");
+        }
+    }
+    public void cancelarReunion() {     
+        employeeID = 0;
+        System.out.print("Ingrese ID empleado:");
+        int id = scan.nextInt();
+        scan.nextLine();
+        if (id > 0) {
+            Employee emp = listEmployee.stream().filter(e -> id == e.getEmployeeID()).findFirst().orElse(null);
+            if (emp != null){
+                emp.cancelMeeting(listEmployee);
+            } else {
+                System.out.println("No existe empleado con ID: " + id);
+            }
+        } else {
+            System.out.println("Debe ingresar ID valido");
+        }
+    }
+    public void obtenerEmpleadoPorSalario() {
+        System.out.print("Ingrese Salario: ");
+        double salario = scan.nextDouble();
+        scan.nextLine();
+        listEmployee.getFirst().getEmployeeBySalary(listEmployee, salario);
+    }
+    public void obtenerEmpleadoPorDistrito() {
+        System.out.print("Ingrese Distrito: ");
+        String distrito = scan.nextLine();
+        listEmployee.getFirst().getEmployeeByDistrict(listEmployee, distrito);
     }
 }

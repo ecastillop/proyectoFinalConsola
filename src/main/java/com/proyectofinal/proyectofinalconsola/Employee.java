@@ -214,9 +214,15 @@ public class Employee {
         System.out.println("Empleado registrado");
     }
     // permite actualizar empleado en la lista
-    public void actualizaEmpleado(int id, Employee employee, List<Employee> listEmployee) {
-        // segun el indice (id) se actualiza el empleado
-        listEmployee.set(id, employee);
+    public void actualizaEmpleado(int employeeID, Employee employee, List<Employee> listEmployee) {
+        // segun el id se actualiza el empleado
+        for (int i = 0;  i < listEmployee.size(); i ++) {
+            if (listEmployee.get(i).getEmployeeID() == employeeID) {
+                listEmployee.set(i, employee);
+                return;
+            }
+        }
+        System.out.println("No existe empleado con ID: " + employeeID);
     }
     // busca sala en la lista, si existe retorna true, sino false
     public boolean selectRoom(List<Employee> listEmployee) {
@@ -248,8 +254,48 @@ public class Employee {
                         !(emp.endTime.isBefore(this.startTime) // fin de otro antes de mi inicio
                           || this.endTime.isBefore(emp.getStartTime()))); // mi fin antes de su inicio
     }
+    // inicia la creacion de la reunion, espera parametro lista de empleados
+    // retorna true / false, en caso se quiera realizar alguna accion
+    public boolean create(List<Employee> listEmployee) {
+        // verifica disponibilidad de la sala
+        boolean bool = this.checkAvailability(listEmployee, this.room);
+        // ejecuta metodo que realiza la programacion
+        this.release(listEmployee, bool);
+        return bool;
+    }
+    // realiza la programacion, espera como parametro la lista de empleados, y una confirmacion de programacion
+    public void release(List<Employee> listEmployee, boolean commit) {
+        // si confirmacion es falsa ejecuta metodo que limpia valores
+        if (!commit) {
+            // ejecuta metodo para cancelar reunion
+            this.cancelMeeting(listEmployee);
+            System.out.print("Progrmacion no realizada: \n" + this.getEmployeeMeet());
+            return;
+        }
+        // ejecuta metodo que actualiza informacion de empleado en la lista
+        this.actualizaEmpleado(this.employeeID, this, listEmployee);
+        System.out.print("Programacion realizada: \n" + this.getEmployeeMeet());
+    }
+    // cancela reunion limpiando valores de sala y reunion
+    public void cancelMeeting(List<Employee> listEmployee) {
+        this.room = "";
+        this.capacity = null;
+        this.location = "";
+        this.meetingSubject = "";
+        this.startTime = null;
+        this.endTime = null;
+        // ejecuta metodo que actualiza informacion de empleado en la lista
+        this.actualizaEmpleado(this.employeeID, this, listEmployee);
+    }
+    public void rescheduleMeeting(List<Employee> listEmployee) {
+        boolean bool = this.selectRoom(listEmployee);
+        if (bool) {
+            this.create(listEmployee);
+        }
+        
+    }
     // busca empleados en la lista que tengan mayor o igual salario buscado mediante parametro salary
-    public void geyEmployeeBySalary(List<Employee> listEmployee, double salary) {
+    public void getEmployeeBySalary(List<Employee> listEmployee, double salary) {
         // recorre toda la lista de empleados
         for(int x = 0; x < listEmployee.size(); x++){
             // valida que el empleado de la iteracion actual tenga igual o mayor salario
@@ -260,7 +306,7 @@ public class Employee {
         }
     }
     // busca empleados en la lista que pertenezcan al distrito buscado mediante parametro district
-    public void geyEmployeeByDistrict(List<Employee> listEmployee, String district){
+    public void getEmployeeByDistrict(List<Employee> listEmployee, String district){
         // recorre toda la lista de empleados
         for(int x=0; x < listEmployee.size(); x++){
             // valida que el empleado de la iteracion actual pertenezca al distrito buscado
@@ -283,5 +329,11 @@ public class Employee {
                 this.age, this.birthday, this.gender, this.maritalStatus, this.district, this.address, this.nationality,
                 this.salary, this.position, this.email, this.room, this.capacity, this.location, this.meetingSubject,
                 this.startTime, this.endTime);
+    }
+    public String getEmployeeMeet() {
+        return String.format("employeID: %d, firstName: %s, lastName: %s, room: %s, capacity: %d, location: %s, "
+                + "meetingSubject: %s, startTime: %s, endTime: %s\n", 
+                this.employeeID, this.firstName, this.lastName, this.room, this.capacity, this.location, 
+                this.meetingSubject,this.startTime, this.endTime);
     }
 }
