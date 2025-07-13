@@ -141,33 +141,33 @@ public class Employee {
             System.out.println("Formato de fecha invalido usa (yyyy-MM-dd)");
             return;
         }
-        System.out.println("Genero (Masculino=M, Femenino=F)");
+        System.out.print("Genero (Masculino=M, Femenino=F): ");
         char genero=scan.next().charAt(0);
-        System.out.println("Estado civil");
+        System.out.print("Estado civil: ");
         String estadoCivil = scan.nextLine();
-        System.out.println("Distrito");
+        System.out.print("Distrito: ");
         String distrito=scan.nextLine();
-        System.out.println("Nacionalidad");
+        System.out.print("Nacionalidad: ");
         String nacionalidad=scan.nextLine();
-        System.out.println("Salario");
+        System.out.print("Salario: ");
         double salario=scan.nextDouble();
         scan.nextLine();
-        System.out.println("Puesto.");
+        System.out.print("Puesto: ");
         String puesto=scan.nextLine();
-        System.out.println("Correo");
+        System.out.print("Correo: ");
         String correo=scan.nextLine();
-        System.out.println("Sala");
+        System.out.print("Sala: ");
         String sala=scan.nextLine();
-        System.out.println("Capacidad");
+        System.out.print("Capacidad: ");
         int capacidad=scan.nextInt();
         scan.nextLine();
-        System.out.println("Ubicacion");
+        System.out.print("Ubicacion: ");
         String ubicacion=scan.nextLine();
-        System.out.println("Reunion");
+        System.out.print("Reunion: ");
         String reunion=scan.nextLine();
-        System.out.println("Hora de Inicio (HH:mm)");
+        System.out.print("Hora de Inicio (HH:mm): ");
         String horaDeInicio=scan.nextLine();
-        System.out.println("Hora de Finalizacion (HH:mm)");
+        System.out.print("Hora de Finalizacion (HH:mm): ");
         String horaDeFinalizacion=scan.nextLine();
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime inicio = null;
@@ -178,7 +178,7 @@ public class Employee {
             LocalDate hoy = LocalDate.now();
             inicio = LocalDateTime.of(hoy, inicioTime);
             fin = LocalDateTime.of(hoy, finTime);
-            if (fin.isAfter(inicio)) {
+            if (!fin.isAfter(inicio)) {
                 System.out.println("Error: la hora fin debe ser mayor que hora inicio");
                 return;
             }
@@ -259,6 +259,32 @@ public class Employee {
     public boolean create(List<Employee> listEmployee) {
         // verifica disponibilidad de la sala
         boolean bool = this.checkAvailability(listEmployee, this.room);
+        System.out.print("Reunion: ");
+        String reunion=scan.nextLine();
+        System.out.print("Hora de Inicio (HH:mm): ");
+        String horaDeInicio=scan.nextLine();
+        System.out.print("Hora de Finalizacion (HH:mm): ");
+        String horaDeFinalizacion=scan.nextLine();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime inicio = null;
+        LocalDateTime fin = null;
+        try {
+            LocalTime inicioTime = LocalTime.parse(horaDeInicio, timeFormatter);
+            LocalTime finTime = LocalTime.parse(horaDeFinalizacion, timeFormatter);
+            LocalDate hoy = LocalDate.now();
+            inicio = LocalDateTime.of(hoy, inicioTime);
+            fin = LocalDateTime.of(hoy, finTime);
+            if (!fin.isAfter(inicio)) {
+                System.out.println("Error: la hora fin debe ser mayor que hora inicio");
+                return false;
+            }
+            this.setMeetingSubject(reunion);
+            this.setStartTime(inicio);
+            this.setEndTime(fin);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+            return false;
+        }
         // ejecuta metodo que realiza la programacion
         this.release(listEmployee, bool);
         return bool;

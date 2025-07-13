@@ -50,12 +50,12 @@ public class ProyectoFinalConsola {
         listEmployee.add(new Employee(10, "Oscar", "Paredes", "44556677", 1, 38,Date.valueOf("1987-02-14"), 'M', "Casado","Chorrillos", "Av. Defensores 321", "Peruano",4800.00, "Full Stack", "oscar.paredes@example.com","Sala 10", 15, "Piso 04 - centro","Demo funcional",LocalDateTime.of(2025, 7, 5, 10, 30),LocalDateTime.of(2025, 7, 5, 11, 30)));
         listEmployee.add(new Employee(11,"Miguel","Fernandez","76224495",2,25,Date.valueOf("2000-11-03"),'M',"Soltero","comas","Jr. Santa Isolina 222","Peruano",3700.00,"yut","miguel.fernandez@exmaple.com","Sala 5",12,"Piso 03 sur","Repaso",LocalDateTime.of(2025,6,4,8,12),LocalDateTime.of(2025,6,4,2,11)));
         listEmployee.add(new Employee(12,"Carmen","Martinez","34235423",2,24,Date.valueOf("2001-12-03"),'F',"Casada","Barranca","jr. Asuncion 12", "Peruana",2344.00,"mait","carmen.martinez@example.com","sala10",14,"Piso 02 - centro ","Reforsamiento",LocalDateTime.of(2025,4,5,12,6),LocalDateTime.of(2025,5,3,12,4)));
-        listEmployee.add(new Employee(13,"Marcos","Paredes","24004544",2,26,Date.valueOf("1999-23-2"),'M',"viudo","San Martin ","Jr. Argentina 23", "Peruano",3452.00,"metd","marcosmcq@example.com","Sala 6",15,"Piso 03- norte","Avande del Portafolio",LocalDateTime.of(2025,5,2,12,25),LocalDateTime.of(2025,5,3,16,3)));
+        listEmployee.add(new Employee(13,"Marcos","Paredes","24004544",2,26,Date.valueOf("1999-02-23"),'M',"viudo","San Martin ","Jr. Argentina 23", "Peruano",3452.00,"metd","marcosmcq@example.com","Sala 6",15,"Piso 03- norte","Avande del Portafolio",LocalDateTime.of(2025,5,2,12,25),LocalDateTime.of(2025,5,3,16,3)));
         listEmployee.add(new Employee(14,"Medaly","Gomez","34445522",1,24,Date.valueOf("2001-12-07"),'F',"Solterra","collique","Panamerica 326","Peruana",3455.00,"rsf","MedalyGomez@example.com","Sala 4",12,"piso 04- sur","Mejora Auditiva",LocalDateTime.of(2025,5,4,5,8),LocalDateTime.of(2025,5,7,9,2)));
         listEmployee.add(new Employee(15,"Juan","Jarra","56003305",1,40,Date.valueOf("1985-04-12"),'M',"casado","San Juan","AV. Mexico 234","Peruano",5432.00,"leor","JuanJarra@example.com","Sala 06",34,"Piso 02-sur","Orientacion Vocacional",LocalDateTime.of(2025,3,6,12,8),LocalDateTime.of(2025,3,2,7,12)));
         listEmployee.add(new Employee(16,"Martin","Mendoza","76445998",1,25,Date.valueOf("2000-11-04"),'M',"casado","Lima","AV. San Jose 234","Peruano",2345.00,"lser","martinMendoza@example.com","sala 05",23,"Piso 03-centro","Orientacion Lavoral",LocalDateTime.of(2025,7,3,5,4),LocalDateTime.of(2025,6,7,8,6)));
-        listEmployee.add(new Employee(17,"Margarita","Calzado","75440034",1,23,Date.valueOf("2002-14-09"),'F',"Soltera","Los olivos","jr.Los Alisos 23","Peruano",4566.00,"reerrr","margaritaCalzado@example.com","sala 05",35,"piso 06-sur","El impacto de la IA en el campo Lavoral",LocalDateTime.of(2025,5,46,4,2),LocalDateTime.of(2025,7,7,7,7)));
-        listEmployee.add(new Employee(18,"Daniel","Roncal","72340303",1,26,Date.valueOf("1999-23-05"),'M',"casado","Miraflores","jr.huaraz 345","Peruano",2345.00,"errewwww","danielRoncal@example.com","sala 03",12,"Piso 09-centro","Taller de calculo 2",LocalDateTime.of(2025,4,5,7,9),LocalDateTime.of(2025,7,8,9,5)));
+        listEmployee.add(new Employee(17,"Margarita","Calzado","75440034",1,23,Date.valueOf("2002-09-14"),'F',"Soltera","Los olivos","jr.Los Alisos 23","Peruano",4566.00,"reerrr","margaritaCalzado@example.com","sala 05",35,"piso 06-sur","El impacto de la IA en el campo Lavoral",LocalDateTime.of(2025,5,16,4,2),LocalDateTime.of(2025,7,7,7,7)));
+        listEmployee.add(new Employee(18,"Daniel","Roncal","72340303",1,26,Date.valueOf("1999-05-23"),'M',"casado","Miraflores","jr.huaraz 345","Peruano",2345.00,"errewwww","danielRoncal@example.com","sala 03",12,"Piso 09-centro","Taller de calculo 2",LocalDateTime.of(2025,4,5,7,9),LocalDateTime.of(2025,7,8,9,5)));
         listEmployee.add(new Employee(19,"Rosa","Santillan","76453222",2,27,Date.valueOf("1998-03-05"),'F',"Soltera","Collique","Jr.huascaran 234","Peruana",5432.00,"eiiiiio","rosaSantillan@example.com","sala 02",26,"Piso 01-centro","Manejo de la IA",LocalDateTime.of(2025,9,7,3,6),LocalDateTime.of(2025,7,3,5,6)));
         listEmployee.add(new Employee(20,"Sandre","Laverianao","76339903",1,30,Date.valueOf("1995-11-30"),'F',"Casada","Puente Piedra","jr. Moscu 244","Mexicana",6543.00,"errooo","sandraLaveriano@example.com","sala 03",25,"piso 03-sur","Competencias Lavorales",LocalDateTime.of(2025,4,5,3,7),LocalDateTime.of(2025,6,6,7,8))); 
         boolean salir = false;
@@ -110,8 +110,7 @@ public class ProyectoFinalConsola {
             System.out.print("Lista de opciones\n"
                     + "1. registrar\n"
                     + "2. actualizar\n"
-                    + "3. eliminar\n"
-                    + "4. listar\n"
+                    + "3. listar\n"
                     + "0. Salir\n"
                     + "Escoge opcion: ");
             int option = scan.nextInt();
@@ -139,7 +138,7 @@ public class ProyectoFinalConsola {
                     // CONSUMO DE METODO QUE ACTUALIZA, USA PARAMETROS
                     instanciaEmployee.actualizaEmpleado(id, employee,listEmployee);
                     break;
-                case 4:
+                case 3:
                     litaEmpleados(); // CONSUMO DE METODO QUE LEE LA LISTA QUE PERSISTE EN EL TIEMPO
                     break;
                 default:
@@ -183,10 +182,10 @@ public class ProyectoFinalConsola {
                 }
             }
             if (!existeSala) {
-                System.out.println("No existe sala con ID: " + idSala);                
+                System.out.println("*** No existe sala con ID: " + idSala);                
             }
         } else {
-            System.out.println("No existe empleado con ID: " + employeeID);
+            System.out.println("*** No existe empleado con ID: " + employeeID);
         }
     }
     public void programarReunion() {
@@ -195,10 +194,10 @@ public class ProyectoFinalConsola {
             if (emp != null){
                 boolean bool = emp.create(listEmployee);
             } else {
-                System.out.println("No existe empleado con ID: " + employeeID);
+                System.out.println("*** No existe empleado con ID: " + employeeID);
             }
         } else {
-            System.out.println("Primero debe seleccionar sala y empleado");
+            System.out.println("*** Primero debe seleccionar sala y empleado");
         }
     }    
     public void reprogramarReunion() {        
@@ -210,11 +209,12 @@ public class ProyectoFinalConsola {
             Employee emp = listEmployee.stream().filter(e -> id == e.getEmployeeID()).findFirst().orElse(null);
             if (emp != null){
                 emp.rescheduleMeeting(listEmployee);
+                System.out.println("*** Reunion reprogramada");
             } else {
-                System.out.println("No existe empleado con ID: " + id);
+                System.out.println("*** No existe empleado con ID: " + id);
             }
         } else {
-            System.out.println("Debe ingresa ID valido");
+            System.out.println("*** Debe ingresa ID valido");
         }
     }
     public void cancelarReunion() {     
@@ -226,11 +226,12 @@ public class ProyectoFinalConsola {
             Employee emp = listEmployee.stream().filter(e -> id == e.getEmployeeID()).findFirst().orElse(null);
             if (emp != null){
                 emp.cancelMeeting(listEmployee);
+                System.out.println("*** Reunion cancelada.");
             } else {
-                System.out.println("No existe empleado con ID: " + id);
+                System.out.println("*** No existe empleado con ID: " + id);
             }
         } else {
-            System.out.println("Debe ingresar ID valido");
+            System.out.println("*** Debe ingresar ID valido");
         }
     }
     public void obtenerEmpleadoPorSalario() {
