@@ -7,6 +7,7 @@ package com.proyectofinal.proyectofinalconsola;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -60,46 +61,51 @@ public class ProyectoFinalConsola {
         listEmployee.add(new Employee(20,"Sandre","Laverianao","76339903",1,30,Date.valueOf("1995-11-30"),'F',"Casada","Puente Piedra","jr. Moscu 244","Mexicana",6543.00,"errooo","sandraLaveriano@example.com","sala 03",25,"piso 03-sur","Competencias Lavorales",LocalDateTime.of(2025,4,5,3,7),LocalDateTime.of(2025,6,6,7,8))); 
         boolean salir = false;
         while (!salir) { // al agregar signo ! se niega, entonces evalua false.
-            System.out.print("Lista Opciones\n"
-                    + "1. Mantenimiento empleado\n"
-                    + "2. Seleccionar Sala\n"
-                    + "3. Programar reunion\n"
-                    + "4. Re-programar reunion\n"
-                    + "5. Cancelar reunion\n"
-                    + "6. Obtener Empleados por salario\n"
-                    + "7. Obtener Empleados por distrito\n"
-                    + "0. Salir\n"
-                    + "Escoge la opcion: ");
-            int option = scan.nextInt();
-            scan.nextLine();        
-            switch (option) {
-                case 0:
-                    salir = true;
-                    break;
-                case 1:
-                    instanciaClasePrincipal.mantenimientoEmpleado(); // LLAMADA AL METODO MANTENIMIENTO
-                    break;
-                case 2:
-                    instanciaClasePrincipal.selecionarSala();
-                    break;
-                case 3:
-                    instanciaClasePrincipal.programarReunion();
-                    break;
-                case 4:
-                    instanciaClasePrincipal.reprogramarReunion();
-                    break;
-                case 5:
-                    instanciaClasePrincipal.cancelarReunion();
-                    break;
-                case 6:
-                    instanciaClasePrincipal.obtenerEmpleadoPorSalario();
-                    break;
-                case 7:
-                    instanciaClasePrincipal.obtenerEmpleadoPorDistrito();
-                    break;
-                default:
-                    System.out.println("Opcion invalida.");
-                    break;
+            try{
+                System.out.print("Lista Opciones\n"
+                        + "1. Mantenimiento empleado\n"
+                        + "2. Seleccionar Sala\n"
+                        + "3. Programar reunion\n"
+                        + "4. Re-programar reunion\n"
+                        + "5. Cancelar reunion\n"
+                        + "6. Obtener Empleados por salario\n"
+                        + "7. Obtener Empleados por distrito\n"
+                        + "0. Salir\n"
+                        + "Escoge la opcion: ");
+                int option = scan.nextInt();
+                scan.nextLine();        
+                switch (option) {
+                    case 0:
+                        salir = true;
+                        break;
+                    case 1:
+                        instanciaClasePrincipal.mantenimientoEmpleado(); // LLAMADA AL METODO MANTENIMIENTO
+                        break;
+                    case 2:
+                        instanciaClasePrincipal.selecionarSala();
+                        break;
+                    case 3:
+                        instanciaClasePrincipal.programarReunion();
+                        break;
+                    case 4:
+                        instanciaClasePrincipal.reprogramarReunion();
+                        break;
+                    case 5:
+                        instanciaClasePrincipal.cancelarReunion();
+                        break;
+                    case 6:
+                        instanciaClasePrincipal.obtenerEmpleadoPorSalario();
+                        break;
+                    case 7:
+                        instanciaClasePrincipal.obtenerEmpleadoPorDistrito();
+                        break;
+                    default:
+                        System.out.println("Opcion invalida.");
+                        break;
+                }
+            } catch (InputMismatchException ex) {
+                System.out.println("*** Error: Caracter invalido, ingresa numero entero.");
+                scan.nextLine();
             }
         }
     }
@@ -107,144 +113,177 @@ public class ProyectoFinalConsola {
     public void mantenimientoEmpleado() {
         boolean salir = false; 
         while (!salir) { // al agregar signo ! se niega, entonces evalua false
-            System.out.print("Lista de opciones\n"
-                    + "1. registrar\n"
-                    + "2. actualizar\n"
-                    + "3. listar\n"
-                    + "0. Salir\n"
-                    + "Escoge opcion: ");
-            int option = scan.nextInt();
-            scan.nextLine();
-            switch (option) {
-                case 0:
-                    salir = true;
-                    break;
-                case 1:
-                    instanciaEmployee.registraEmpleado(listEmployee); // LLAMADO AL METODO DE LA ENTIDAD QUE REGISTRA
-                    break;
-                case 2:
-                    System.out.print("Ingrsa ID de empleado: ");
-                    int id = scan.nextInt();
-                    scan.nextLine();
-                    System.out.print("Nombre: ");
-                    String nombre = scan.nextLine();
-                    System.out.print("Apellido: ");
-                    String apellido = scan.nextLine();
-                    // NUEVA INSTANCIA DE ENTIDAD PARA ALMACENAR NUEVOS VALORES
-                    Employee employee = new Employee();
-                    // ASIGNACIÓN DE VALORES MEDIANTE LOS SETTERS
-                    employee.setFirstName(nombre);
-                    employee.setLastName(apellido);
-                    // CONSUMO DE METODO QUE ACTUALIZA, USA PARAMETROS
-                    instanciaEmployee.actualizaEmpleado(id, employee,listEmployee);
-                    break;
-                case 3:
-                    litaEmpleados(); // CONSUMO DE METODO QUE LEE LA LISTA QUE PERSISTE EN EL TIEMPO
-                    break;
-                default:
-                    System.out.println("Opcion invalida");
-                    break;
+            try {
+                System.out.print("Lista de opciones\n"
+                        + "1. registrar\n"
+                        + "2. actualizar\n"
+                        + "3. listar\n"
+                        + "0. Salir\n"
+                        + "Escoge opcion: ");
+                int option = scan.nextInt();
+                scan.nextLine();
+                switch (option) {
+                    case 0:
+                        salir = true;
+                        break;
+                    case 1:
+                        instanciaEmployee.registraEmpleado(listEmployee); // LLAMADO AL METODO DE LA ENTIDAD QUE REGISTRA
+                        break;
+                    case 2:
+                        System.out.print("Ingresa ID de empleado: ");
+                        int id = scan.nextInt();
+                        scan.nextLine();
+                        System.out.print("Nombre: ");
+                        String nombre = scan.nextLine();
+                        System.out.print("Apellido: ");
+                        String apellido = scan.nextLine();
+                        // NUEVA INSTANCIA DE ENTIDAD PARA ALMACENAR NUEVOS VALORES
+                        Employee employee = new Employee();
+                        // ASIGNACIÓN DE VALORES MEDIANTE LOS SETTERS
+                        employee.setFirstName(nombre);
+                        employee.setLastName(apellido);
+                        // CONSUMO DE METODO QUE ACTUALIZA, USA PARAMETROS
+                        instanciaEmployee.actualizaEmpleado(id, employee,listEmployee);
+                        break;
+                    case 3:
+                        litaEmpleados(); // CONSUMO DE METODO QUE LEE LA LISTA QUE PERSISTE EN EL TIEMPO
+                        break;
+                    default:
+                        System.out.println("Opcion invalida");
+                        break;
+                }
+            }  catch (InputMismatchException ex) {
+                System.out.println("*** Error: Caracter invalido, ingresa numero entero.");
+                scan.nextLine();
             }
         }
     }
     public void litaEmpleados() {
-        // RECORRE O ITERA LISTA
-        System.out.println("*** Lista de empleados: ");
-        for(int x = 0; x < listEmployee.size(); x++) {
-            // OBTIENE VALORES MEDIANTE LOS GETTERS
-            System.out.print(listEmployee.get(x).toString());
+        try {
+            // RECORRE O ITERA LISTA
+            System.out.println("*** Lista de empleados: ");
+            for(int x = 0; x < listEmployee.size(); x++) {
+                // OBTIENE VALORES MEDIANTE LOS GETTERS
+                System.out.print(listEmployee.get(x).toString());
+            }
+            System.out.println("***");
+        } catch (Exception ex) {
+            System.out.println("*** Error: " + ex.getMessage());
         }
-        System.out.println("***");
     }
     public void selecionarSala(){
-        employeeID = 0;
-        System.out.print("Ingrese ID empleado:");
-        int id = scan.nextInt();
-        scan.nextLine();
-        if (id > 0) {
-            employeeID = id;
-        }
-        // stream es similar a for pero mucho más conciso, con mejoras notables
-        Employee emp = listEmployee.stream().filter(e -> employeeID == e.getEmployeeID()).findFirst().orElse(null);
-        if (emp != null){
-            System.out.print("Ingrese ID sala: ");
-            int idSala = scan.nextInt();
-            boolean existeSala = false;
-            for(int x = 0; x < salas.length; x++) { // itera elementos de array
-                if (idSala == idSalas[x]) { // verifica existencia
-                    existeSala = true;
-                    emp.setRoom(salas[x]); // setea sala en atributo room
-                    boolean bool = emp.selectRoom(listEmployee); // ejecuta metodo que verifica disponibilidad usando la lista
-                    if (bool) {
-                        emp.actualizaEmpleado(id, emp, listEmployee);
-                        System.out.print(emp.toString());
-                    } else {
-                        employeeID = 0;
-                    }
-                }
+        try {
+            employeeID = 0;
+            System.out.print("Ingrese ID empleado:");
+            int id = scan.nextInt();
+            scan.nextLine();
+            if (id > 0) {
+                employeeID = id;
             }
-            if (!existeSala) {
-                System.out.println("*** No existe sala con ID: " + idSala);                
-            }
-        } else {
-            System.out.println("*** No existe empleado con ID: " + employeeID);
-        }
-    }
-    public void programarReunion() {
-        if (employeeID != 0) {
+            // stream es similar a for pero mucho más conciso, con mejoras notables
             Employee emp = listEmployee.stream().filter(e -> employeeID == e.getEmployeeID()).findFirst().orElse(null);
             if (emp != null){
-                boolean bool = emp.create(listEmployee);
+                System.out.print("Ingrese ID sala: ");
+                int idSala = scan.nextInt();
+                boolean existeSala = false;
+                for(int x = 0; x < salas.length; x++) { // itera elementos de array
+                    if (idSala == idSalas[x]) { // verifica existencia
+                        existeSala = true;
+                        emp.setRoom(salas[x]); // setea sala en atributo room
+                        boolean bool = emp.selectRoom(listEmployee); // ejecuta metodo que verifica disponibilidad usando la lista
+                        if (bool) {
+                            emp.actualizaEmpleado(id, emp, listEmployee);
+                            System.out.print(emp.toString());
+                        } else {
+                            employeeID = 0;
+                        }
+                    }
+                }
+                if (!existeSala) {
+                    System.out.println("*** No existe sala con ID: " + idSala);                
+                }
             } else {
                 System.out.println("*** No existe empleado con ID: " + employeeID);
             }
-        } else {
-            System.out.println("*** Primero debe seleccionar sala y empleado");
-        }
-    }    
-    public void reprogramarReunion() {        
-        employeeID = 0;
-        System.out.print("Ingrese ID empleado:");
-        int id = scan.nextInt();
-        scan.nextLine();
-        if (id != 0) {
-            Employee emp = listEmployee.stream().filter(e -> id == e.getEmployeeID()).findFirst().orElse(null);
-            if (emp != null){
-                emp.rescheduleMeeting(listEmployee);
-                System.out.println("*** Reunion reprogramada");
-            } else {
-                System.out.println("*** No existe empleado con ID: " + id);
-            }
-        } else {
-            System.out.println("*** Debe ingresa ID valido");
+        } catch (Exception ex) {
+            System.out.println("*** Error: " + ex.getMessage());
         }
     }
-    public void cancelarReunion() {     
-        employeeID = 0;
-        System.out.print("Ingrese ID empleado:");
-        int id = scan.nextInt();
-        scan.nextLine();
-        if (id > 0) {
-            Employee emp = listEmployee.stream().filter(e -> id == e.getEmployeeID()).findFirst().orElse(null);
-            if (emp != null){
-                emp.cancelMeeting(listEmployee);
-                System.out.println("*** Reunion cancelada.");
+    public void programarReunion() {
+        try {
+            if (employeeID != 0) {
+                Employee emp = listEmployee.stream().filter(e -> employeeID == e.getEmployeeID()).findFirst().orElse(null);
+                if (emp != null){
+                    boolean bool = emp.create(listEmployee);
+                } else {
+                    System.out.println("*** No existe empleado con ID: " + employeeID);
+                }
             } else {
-                System.out.println("*** No existe empleado con ID: " + id);
+                System.out.println("*** Primero debe seleccionar sala y empleado");
             }
-        } else {
-            System.out.println("*** Debe ingresar ID valido");
+        } catch (Exception ex) {
+            System.out.println("*** Error: " + ex.getMessage());
+        }
+    }    
+    public void reprogramarReunion() {
+        try {
+            employeeID = 0;
+            System.out.print("Ingrese ID empleado:");
+            int id = scan.nextInt();
+            scan.nextLine();
+            if (id != 0) {
+                Employee emp = listEmployee.stream().filter(e -> id == e.getEmployeeID()).findFirst().orElse(null);
+                if (emp != null){
+                    emp.rescheduleMeeting(listEmployee);
+                    System.out.println("*** Reunion reprogramada");
+                } else {
+                    System.out.println("*** No existe empleado con ID: " + id);
+                }
+            } else {
+                System.out.println("*** Debe ingresa ID valido");
+            }
+        } catch (Exception ex) {
+            System.out.println("*** Error: " + ex.getMessage());
+        }
+    }
+    public void cancelarReunion() { 
+        try {
+            employeeID = 0;
+            System.out.print("Ingrese ID empleado:");
+            int id = scan.nextInt();
+            scan.nextLine();
+            if (id > 0) {
+                Employee emp = listEmployee.stream().filter(e -> id == e.getEmployeeID()).findFirst().orElse(null);
+                if (emp != null){
+                    emp.cancelMeeting(listEmployee);
+                    System.out.println("*** Reunion cancelada.");
+                } else {
+                    System.out.println("*** No existe empleado con ID: " + id);
+                }
+            } else {
+                System.out.println("*** Debe ingresar ID valido");
+            }
+        } catch (Exception ex) {
+            System.out.println("*** Error: " + ex.getMessage());
         }
     }
     public void obtenerEmpleadoPorSalario() {
-        System.out.print("Ingrese Salario: ");
-        double salario = scan.nextDouble();
-        scan.nextLine();
-        listEmployee.getFirst().getEmployeeBySalary(listEmployee, salario);
+        try {
+            System.out.print("Ingrese Salario: ");
+            double salario = scan.nextDouble();
+            scan.nextLine();
+            listEmployee.getFirst().getEmployeeBySalary(listEmployee, salario);
+        } catch (Exception ex) {
+            System.out.println("*** Error: " + ex.getMessage());
+        }
     }
     public void obtenerEmpleadoPorDistrito() {
-        System.out.print("Ingrese Distrito: ");
-        String distrito = scan.nextLine();
-        listEmployee.getFirst().getEmployeeByDistrict(listEmployee, distrito);
+        try {
+            System.out.print("Ingrese Distrito: ");
+            String distrito = scan.nextLine();
+            listEmployee.getFirst().getEmployeeByDistrict(listEmployee, distrito);
+        } catch (Exception ex) {
+            System.out.println("*** Error: " + ex.getMessage());
+        }
     }
 }

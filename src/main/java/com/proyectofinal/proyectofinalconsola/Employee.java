@@ -117,115 +117,148 @@ public class Employee {
     
     // DECLARACIÓN DE METODOS
     public void registraEmpleado(List<Employee> listEmployee) {
-        System.out.print("Nombre: ");
-        String nombre = scan.nextLine();
-        System.out.print("Apellido: ");
-        String apellido = scan.nextLine();
-        System.out.print("Numero de Documento: ");
-        String numeroDocumento = scan.nextLine();
-        System.out.print("Tipo de Documento (1=DNI, 2=RUC, 3=Carnet Ext.): ");
-        int tipoDocumento = scan.nextInt();
-        scan.nextLine();
-        System.out.print("Edad: ");
-        int edad = scan.nextInt();
-        scan.nextLine();
-        System.out.print("Nacimiento (yyyy-MM-dd): ");
-        String strBirthday = scan.nextLine();
-        DateTimeFormatter dtfB = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate nacimientoLD;
-        Date nacimiento;
         try {
-            nacimientoLD = LocalDate.parse(strBirthday, dtfB);
-            nacimiento = Date.from(nacimientoLD.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        } catch (Exception ex) {
-            System.out.println("Formato de fecha invalido usa (yyyy-MM-dd)");
-            return;
-        }
-        System.out.print("Genero (Masculino=M, Femenino=F): ");
-        char genero=scan.next().charAt(0);
-        System.out.print("Estado civil: ");
-        String estadoCivil = scan.nextLine();
-        System.out.print("Distrito: ");
-        String distrito=scan.nextLine();
-        System.out.print("Nacionalidad: ");
-        String nacionalidad=scan.nextLine();
-        System.out.print("Salario: ");
-        double salario=scan.nextDouble();
-        scan.nextLine();
-        System.out.print("Puesto: ");
-        String puesto=scan.nextLine();
-        System.out.print("Correo: ");
-        String correo=scan.nextLine();
-        System.out.print("Sala: ");
-        String sala=scan.nextLine();
-        System.out.print("Capacidad: ");
-        int capacidad=scan.nextInt();
-        scan.nextLine();
-        System.out.print("Ubicacion: ");
-        String ubicacion=scan.nextLine();
-        System.out.print("Reunion: ");
-        String reunion=scan.nextLine();
-        System.out.print("Hora de Inicio (HH:mm): ");
-        String horaDeInicio=scan.nextLine();
-        System.out.print("Hora de Finalizacion (HH:mm): ");
-        String horaDeFinalizacion=scan.nextLine();
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime inicio = null;
-        LocalDateTime fin = null;
-        // try {} catch () {} es usado para controlar errores
-        try {
-            // le da formato hora y minuto a los valore singresados inicio - fin
-            LocalTime inicioTime = LocalTime.parse(horaDeInicio, timeFormatter);
-            LocalTime finTime = LocalTime.parse(horaDeFinalizacion, timeFormatter);
-            LocalDate hoy = LocalDate.now();
-            // le da formato de fecha, hora y minuto a inicio - fin
-            inicio = LocalDateTime.of(hoy, inicioTime);
-            fin = LocalDateTime.of(hoy, finTime);
-            if (!fin.isAfter(inicio)) {
-                System.out.println("*** Error: la hora fin debe ser mayor que hora inicio");
+            System.out.print("Nombre: ");
+            String nombre = scan.nextLine();
+            System.out.print("Apellido: ");
+            String apellido = scan.nextLine();
+            System.out.print("Numero de Documento: ");
+            String numeroDocumento = scan.nextLine();
+            System.out.print("Tipo de Documento (1=DNI, 2=RUC, 3=Carnet Ext.): ");
+            int tipoDocumento = scan.nextInt();
+            scan.nextLine();
+            System.out.print("Edad: ");
+            int edad = scan.nextInt();
+            scan.nextLine();
+            System.out.print("Nacimiento (yyyy-MM-dd): ");
+            String strBirthday = scan.nextLine();
+            DateTimeFormatter dtfB = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate nacimientoLD;
+            Date nacimiento;
+            try {
+                nacimientoLD = LocalDate.parse(strBirthday, dtfB);
+                nacimiento = Date.from(nacimientoLD.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            } catch (Exception ex) {
+                System.out.println("Formato de fecha invalido usa (yyyy-MM-dd)");
                 return;
             }
+            System.out.print("Genero (Masculino=M, Femenino=F): ");
+            char genero=scan.next().charAt(0);
+            scan.nextLine();
+            System.out.print("Estado civil: ");
+            String estadoCivil = scan.nextLine();
+            System.out.print("Distrito: ");
+            String distrito=scan.nextLine();
+            System.out.print("Nacionalidad: ");
+            String nacionalidad=scan.nextLine();
+            System.out.print("Salario: ");
+            double salario=scan.nextDouble();
+            scan.nextLine();
+            System.out.print("Puesto: ");
+            String puesto=scan.nextLine();
+            System.out.print("Correo: ");
+            String correo=scan.nextLine();
+            /*
+            System.out.print("Sala: ");
+            String sala=scan.nextLine();
+            System.out.print("Capacidad: ");
+            int capacidad=scan.nextInt();
+            scan.nextLine();
+            System.out.print("Ubicacion: ");
+            String ubicacion=scan.nextLine();
+            System.out.print("Reunion: ");
+            String reunion=scan.nextLine();
+            System.out.print("Hora de Inicio (HH:mm): ");
+            String horaDeInicio=scan.nextLine();
+            System.out.print("Hora de Finalizacion (HH:mm): ");
+            String horaDeFinalizacion=scan.nextLine();
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalDateTime inicio = null;
+            LocalDateTime fin = null;
+            // try {} catch () {} es usado para controlar errores
+            try {
+                // le da formato hora y minuto a los valore singresados inicio - fin
+                LocalTime inicioTime = LocalTime.parse(horaDeInicio, timeFormatter);
+                LocalTime finTime = LocalTime.parse(horaDeFinalizacion, timeFormatter);
+                LocalDate hoy = LocalDate.now();
+                // le da formato de fecha, hora y minuto a inicio - fin
+                inicio = LocalDateTime.of(hoy, inicioTime);
+                fin = LocalDateTime.of(hoy, finTime);
+                if (!fin.isAfter(inicio)) {
+                    System.out.println("*** Error: la hora fin debe ser mayor que hora inicio");
+                    return;
+                }
+            } catch (Exception ex) {
+                System.out.println("*** Error: " + ex.getMessage());
+                return;
+            }
+            */
+            // instancia de clase
+            Employee employee = new Employee();
+            // mediante los SETTERS asigna valores a cada atributo
+            employee.setEmployeeID(listEmployee.getLast().getEmployeeID()+1);
+            employee.setFirstName(nombre);
+            employee.setLastName(apellido);
+            employee.setDocumentNumber(numeroDocumento);
+            employee.setDocumentType(tipoDocumento);
+            employee.setAge(edad);
+            employee.setBirthday(nacimiento);
+            employee.setGender(genero);
+            employee.setMaritalStatus(estadoCivil);
+            employee.setDistrict(distrito);
+            employee.setNationality(nacionalidad);
+            employee.setSalary(salario);
+            employee.setPosition(puesto);
+            employee.setEmail(correo);
+            /*
+            employee.setRoom(sala);
+            employee.setCapacity(capacidad);
+            employee.setLocation(ubicacion);
+            employee.setMeetingSubject(reunion);
+            employee.setStartTime(inicio);
+            employee.setEndTime(fin);
+            */
+            // agrega registro a la LISTA
+            listEmployee.add(employee);
+            System.out.println("*** Empleado registrado");
         } catch (Exception ex) {
             System.out.println("*** Error: " + ex.getMessage());
-            return;
         }
-        
-        // instancia de clase
-        Employee employee = new Employee();
-        // mediante los SETTERS asigna valores a cada atributo
-        employee.setFirstName(nombre);
-        employee.setLastName(apellido);
-        employee.setDocumentNumber(numeroDocumento);
-        employee.setDocumentType(tipoDocumento);
-        employee.setAge(edad);
-        employee.setBirthday(nacimiento);
-        employee.setGender(genero);
-        employee.setMaritalStatus(estadoCivil);
-        employee.setDistrict(distrito);
-        employee.setNationality(nacionalidad);
-        employee.setSalary(salario);
-        employee.setPosition(puesto);
-        employee.setEmail(correo);
-        employee.setRoom(sala);
-        employee.setCapacity(capacidad);
-        employee.setLocation(ubicacion);
-        employee.setMeetingSubject(reunion);
-        employee.setStartTime(inicio);
-        employee.setEndTime(fin);
-        // agrega registro a la LISTA
-        listEmployee.add(employee);
-        System.out.println("*** Empleado registrado");
     }
     // permite actualizar empleado en la lista
     public void actualizaEmpleado(int employeeID, Employee employee, List<Employee> listEmployee) {
-        // segun el id se actualiza el empleado
-        for (int i = 0;  i < listEmployee.size(); i ++) {
-            if (listEmployee.get(i).getEmployeeID() == employeeID) {
-                listEmployee.set(i, employee);
-                return;
+        try {
+            // segun el id se actualiza el empleado
+            for (int i = 0;  i < listEmployee.size(); i ++) {
+                if (listEmployee.get(i).getEmployeeID() == employeeID) {
+                    Employee emp = listEmployee.get(i);
+                    if (employee.getFirstName()!= null && !employee.getFirstName().isEmpty()) emp.setFirstName(employee.getFirstName());
+                    if (employee.getLastName() != null && !employee.getLastName().isEmpty()) emp.setLastName(employee.getLastName());
+                    if (employee.getDocumentNumber() != null && !employee.getDocumentNumber().isEmpty()) emp.setDocumentNumber(employee.getDocumentNumber());
+                    if (employee.getDocumentType() != null && employee.getDocumentType() >= 0) emp.setDocumentType(employee.getDocumentType());
+                    if (employee.getAge() != null && employee.getAge() >= 0) emp.setAge(employee.getAge());
+                    if (employee.getBirthday() != null) emp.setBirthday(employee.getBirthday());
+                    if (employee.getGender() == 'F' || employee.getGender() == 'M') emp.setGender(employee.getGender());
+                    if (employee.getMaritalStatus() != null && !employee.getMaritalStatus().isEmpty()) emp.setMaritalStatus(employee.getMaritalStatus());
+                    if (employee.getDistrict() != null && !employee.getDistrict().isEmpty()) emp.setDistrict(employee.getDistrict());
+                    if (employee.getNationality() != null && !employee.getNationality().isEmpty()) emp.setNationality(employee.getNationality());
+                    if (employee.getSalary() != 0.0) emp.setSalary(employee.getSalary());
+                    if (employee.getPosition() != null && !employee.getPosition().isEmpty()) emp.setPosition(employee.getPosition());
+                    if (employee.getEmail() != null && !employee.getEmail().isEmpty()) emp.setEmail(employee.getEmail());
+                    if (employee.getRoom() != null) emp.setRoom(employee.getRoom());
+                    if (employee.getCapacity() != null) emp.setCapacity(employee.getCapacity());
+                    if (employee.getLocation() != null) emp.setLocation(employee.getLocation());
+                    if (employee.getMeetingSubject() != null) emp.setMeetingSubject(employee.getMeetingSubject());
+                    if (employee.getStartTime() != null) emp.setStartTime(employee.getStartTime());
+                    if (employee.getEndTime() != null) emp.setEndTime(employee.getEndTime());
+                    System.out.print("*** Registro actualizado: " + emp.toString());
+                    return;
+                }
             }
+            System.out.println("*** No existe empleado con ID: " + employeeID);
+        } catch (Exception ex) {
+            System.out.println("*** Error: " + ex.getMessage());
         }
-        System.out.println("*** No existe empleado con ID: " + employeeID);
     }
     // busca sala en la lista, si existe retorna true, sino false
     public boolean selectRoom(List<Employee> listEmployee) {
@@ -239,9 +272,12 @@ public class Employee {
             // sobre escribe valor de variable
             msg = String.format("*** La sala %s no se encuentra disponible", this.room);
             // se limpia el valor del atributo sala
-            this.room = "";
-            this.capacity = null;
-            this.location = "";
+            this.setRoom("");
+            this.setCapacity(null);
+            this.setLocation("");
+            this.setMeetingSubject("");
+            this.setStartTime(null);
+            this.setEndTime(null);
             this.actualizaEmpleado(this.employeeID, this, listEmployee);
         }
         // muestra en pantalla el mensaje
@@ -296,6 +332,8 @@ public class Employee {
         }
         // ejecuta metodo que realiza la programacion
         this.release(listEmployee, bool);
+        // libera salas en base a reuniones finalizadas
+        // this.liberarReunionesSalas(listEmployee); 
         return bool;
     }
     // realiza la programacion, espera como parametro la lista de empleados, y una confirmacion de programacion
@@ -350,6 +388,25 @@ public class Employee {
                 // muestra en pantalla toda la informacion del empleado
                 System.out.print(listEmployee.get(x).toString());
             }
+        }
+    }
+    public void liberarReunionesSalas(List<Employee> listEmployee) {
+        try {
+            LocalDateTime now = LocalDateTime.now();
+            for (Employee emp: listEmployee) {
+                LocalDateTime inicio = emp.getStartTime();
+                LocalDateTime fin = emp.getEndTime();
+                if (inicio != null && fin != null && fin.isBefore(now)){
+                    emp.setRoom(null);
+                    emp.setCapacity(null);
+                    emp.setLocation(null);
+                    emp.setMeetingSubject(null);
+                    emp.setStartTime(null);
+                    emp.setEndTime(null);
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("*** Error: " + ex.getMessage());
         }
     }
     // @Override permite sobre escribir metodos
