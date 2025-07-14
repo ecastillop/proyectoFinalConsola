@@ -172,18 +172,21 @@ public class Employee {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime inicio = null;
         LocalDateTime fin = null;
+        // try {} catch () {} es usado para controlar errores
         try {
+            // le da formato hora y minuto a los valore singresados inicio - fin
             LocalTime inicioTime = LocalTime.parse(horaDeInicio, timeFormatter);
             LocalTime finTime = LocalTime.parse(horaDeFinalizacion, timeFormatter);
             LocalDate hoy = LocalDate.now();
+            // le da formato de fecha, hora y minuto a inicio - fin
             inicio = LocalDateTime.of(hoy, inicioTime);
             fin = LocalDateTime.of(hoy, finTime);
             if (!fin.isAfter(inicio)) {
-                System.out.println("Error: la hora fin debe ser mayor que hora inicio");
+                System.out.println("*** Error: la hora fin debe ser mayor que hora inicio");
                 return;
             }
         } catch (Exception ex) {
-            System.out.println("Error: " + ex.getMessage());
+            System.out.println("*** Error: " + ex.getMessage());
             return;
         }
         
@@ -211,7 +214,7 @@ public class Employee {
         employee.setEndTime(fin);
         // agrega registro a la LISTA
         listEmployee.add(employee);
-        System.out.println("Empleado registrado");
+        System.out.println("*** Empleado registrado");
     }
     // permite actualizar empleado en la lista
     public void actualizaEmpleado(int employeeID, Employee employee, List<Employee> listEmployee) {
@@ -222,7 +225,7 @@ public class Employee {
                 return;
             }
         }
-        System.out.println("No existe empleado con ID: " + employeeID);
+        System.out.println("*** No existe empleado con ID: " + employeeID);
     }
     // busca sala en la lista, si existe retorna true, sino false
     public boolean selectRoom(List<Employee> listEmployee) {
@@ -230,13 +233,16 @@ public class Employee {
         // retorna true si sala esta disponible, sino false
         boolean bool = this.checkAvailability(listEmployee, this.room);
         // establece valor por defecto para variable msg
-        String msg = String.format("La sala %s si se encuentra disponible", this.room);
+        String msg = String.format("*** La sala %s si se encuentra disponible", this.room);
         // si es falso muestra mensaje y limpia atributo sala
         if (!bool) {
             // sobre escribe valor de variable
-            msg = String.format("La sala %s no se encuentra disponible", this.room);
+            msg = String.format("*** La sala %s no se encuentra disponible", this.room);
             // se limpia el valor del atributo sala
             this.room = "";
+            this.capacity = null;
+            this.location = "";
+            this.actualizaEmpleado(this.employeeID, this, listEmployee);
         }
         // muestra en pantalla el mensaje
         System.out.println(msg);
@@ -268,10 +274,13 @@ public class Employee {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime inicio = null;
         LocalDateTime fin = null;
+        // try {} catch () {} es usado para controlar errores
         try {
+            // le da formato hora y minuto a los valore singresados inicio - fin
             LocalTime inicioTime = LocalTime.parse(horaDeInicio, timeFormatter);
             LocalTime finTime = LocalTime.parse(horaDeFinalizacion, timeFormatter);
             LocalDate hoy = LocalDate.now();
+            // le da formato de fecha, hora y minuto a inicio - fin
             inicio = LocalDateTime.of(hoy, inicioTime);
             fin = LocalDateTime.of(hoy, finTime);
             if (!fin.isAfter(inicio)) {

@@ -178,6 +178,8 @@ public class ProyectoFinalConsola {
                     if (bool) {
                         emp.actualizaEmpleado(id, emp, listEmployee);
                         System.out.print(emp.toString());
+                    } else {
+                        employeeID = 0;
                     }
                 }
             }
